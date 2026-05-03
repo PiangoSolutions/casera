@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Casera | Sabores caseros, siempre listos</title>
+    <!-- Fuentes modernas -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFF9F5;
+            color: #2E241F;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 248, 240, 0.96);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #FFE2CF;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #C46B3F, #A1421A);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #B77C56;
+            display: block;
+        }
+        .nav-links a {
+            margin-left: 28px;
+            text-decoration: none;
+            color: #4F392B;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .nav-links a:hover { color: #C46B3F; }
+        .btn-pedido-nav {
+            background: #25D366;
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 40px;
+            box-shadow: 0 2px 8px rgba(37,211,102,0.2);
+        }
+        .btn-pedido-nav:hover { background: #20b859; transform: scale(0.97); }
+
+        /* Hero */
+        .hero {
+            padding: 60px 0 50px;
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #35251D;
+        }
+        .hero .highlight {
+            background: #F7DECA;
+            padding: 0 12px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #6B4D38;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            box-shadow: 0 5px 12px rgba(37,211,102,0.25);
+        }
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+        }
+        .btn-whatsapp:hover, .btn-telegram:hover { transform: translateY(-3px); filter: brightness(1.02); }
+
+        /* Sección productos */
+        .productos {
+            padding: 60px 0 40px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+        }
+        .section-title:after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: #E6B17E;
+            display: block;
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+        .grid-productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        /* Tarjetas con tonos pastel distintos */
+        .card {
+            border-radius: 32px;
+            padding: 20px 18px 28px;
+            transition: all 0.25s ease;
+            text-align: center;
+            box-shadow: 0 12px 22px rgba(0,0,0,0.05);
+            background: white;
+            border: 1px solid #FFEADE;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 22px 30px rgba(0,0,0,0.08); }
+        /* imagenes de alta resolución estilo placeholder realista con Unsplash de comidas */
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            background: #f9ede2;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 12px 0 8px;
+        }
+        .card .description {
+            font-size: 0.9rem;
+            color: #7A5B46;
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+        .precio {
+            font-weight: 800;
+            color: #C46B3F;
+            font-size: 1.2rem;
+            margin: 12px 0 6px;
+        }
+        .badge-popular {
+            background: #F3CFB2;
+            font-size: 0.7rem;
+            border-radius: 30px;
+            padding: 4px 12px;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        /* Grupo pedido */
+        .pedido-grupal {
+            background: linear-gradient(110deg, #FEF2E6, #FFF5ED);
+            border-radius: 48px;
+            margin: 50px 0;
+            padding: 48px 32px;
+            text-align: center;
+        }
+        .botones-grupo {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin: 30px 0 20px;
+        }
+        .grupo-card {
+            background: white;
+            border-radius: 60px;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #E6CDB8;
+            transition: 0.2s;
+            color: #2E241F;
+        }
+        .grupo-card:hover { background: #FFF2E6; transform: scale(1.02); }
+
+        /* Sección de mejoras como SERVICIOS */
+        .mejoras-servicios {
+            background: #FFF7F0;
+            border-radius: 48px;
+            padding: 50px 40px;
+            margin: 40px 0 60px;
+        }
+        .grid-ideas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .idea-item {
+            background: white;
+            border-radius: 28px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 1px solid #FFE7DA;
+        }
+        .idea-item i { font-size: 2.2rem; color: #CB7B4A; margin-bottom: 16px; }
+        .idea-item h4 { font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; }
+        .idea-item p { color: #6B5340; font-size: 0.9rem; }
+
+        footer {
+            border-top: 1px solid #F2DFCF;
+            padding: 32px 0;
+            text-align: center;
+            color: #A88B74;
+        }
+        @media (max-width: 760px) {
+            .navbar { flex-direction: column; }
+            .nav-links a { margin: 0 12px; }
+            .hero h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <h1>Casera <i class="fas fa-heart" style="font-size: 1.6rem; color:#CB7B4A;"></i></h1>
+                <span>✨ ¡ponle tu sazón!</span>
+            </div>
+            <div class="nav-links">
+                <a href="#productos">Nuestros productos</a>
+                <a href="#pedido">Haz tu pedido</a>
+                <a href="#mejoras">Servicios Casera</a>
+                <a href="#pedido" class="btn-pedido-nav"><i class="fab fa-whatsapp"></i> Pedir ahora</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <!-- Hero con acento argentino -->
+        <section class="hero">
+            <h2>El sabor de la casa <br> <span class="highlight">listo en minutos</span></h2>
+            <p>⭐ Preelaborados 100% artesanales que saben como en casa. <br> solo calienta, ponle tu sazón y disfruta.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/5491123456789?text=Hola%21%20Quiero%20mandarme%20un%20pedido%20de%20Casera%20%F0%9F%94%A5" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Ordena WhatsApp</a>
+                <a href="https://t.me/casera_pedidos_bot" class="btn-telegram" target="_blank"><i class="fab fa-telegram"></i> Ordena por Telegram</a>
+            </div>
+        </section>
+
+        <!-- Productos: incluye los nuevos (empanada boloñesa, albóndiga cerdo, hamburguesa cerdo) imágenes realistas Unsplash -->
+        <section id="productos" class="productos">
+            <h2 class="section-title">🍽️ Lo que te va a encantar</h2>
+            <div class="grid-productos">
+                <!-- Croquetas -->
+                <div class="card" style="background: #FFF7F0;"><img class="card-img" src="images/croqueta-espinaca.png" alt="Croquetas de espinaca"><h3>Croquetas de espinaca</h3><div class="description">Ingredientes: espinaca, harina, leche, mantequilla, sal, pimienta, huevo, pan rallado.</div><div class="precio">$300 / 12u.</div><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div>
+                <div class="card" style="background: #FFF8F0;"><img class="card-img" src="images/croqueta-pollo.png" alt="Croquetas de pollo"><h3>Croquetas de pollo</h3><div class="description">Ingredientes: pollo, harina, leche, mantequilla, sal, pimienta, huevo, pan rallado.</div><div class="precio">$400 / 12u.</div><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div>
+                <div class="card" style="background: #FFF4E8;"><img class="card-img" src="images/croqueta-chorizo.png" alt="Croquetas de chorizo"><h3>Croquetas de chorizo</h3><div class="description">Ingredientes: chorizo, harina, leche, mantequilla, sal, pimienta, huevo, pan rallado.</div><div class="precio">$3600 / 12u.</div><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div>
+                <div class="card" style="background: #FFF5EA;"><img class="card-img" src="images/croqueta-jamon-serrano.png" alt="Croquetas de jamón"><h3>Croquetas de jamón serrano</h3><div class="description">Ingredientes: jamón, serrano, harina, leche, mantequilla, sal, pimienta, huevo, pan rallado.</div><div class="precio">$330 / 12u.</div><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div>
+                <div class="card" style="background: #FFF2E4;"><img class="card-img" src="images/bastones-queso-empanado.png" alt="Bastones de queso"><h3>Bastones de queso empanado</h3><div class="description">Ingredientes: queso, harina, sal, pimienta, huevo, pan rallado.</div><div class="precio">$2900 / 10u</div><div class="badge-popular"><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div></div>
+                <div class="card" style="background: #FFF9F0;"><img class="card-img" src="images/empanada-jamon-queso.png" alt="Empanadas jamón y queso"><h3>Empanadas jamón & queso</h3><div class="description">Ingredientes: harina, leche, huevo, sal, pimienta, jamón, queso.</div><div class="precio">$380 / 12u.</div><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div>
+                <!-- NUEVA: Empanada de boloñesa de res -->
+                <div class="card" style="background: #FFF5EC;"><img class="card-img" src="images/empanada-bolognesa-res.png" alt="Empanada boloñesa"><h3>Empanada boloñesa de res</h3><div class="description">Ingredientes: harina, leche, huevo, sal, pimienta, cebolla, tomate, res molida.</div><div class="precio">$390 / 12u.</div><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div>
+                <!-- NUEVA: Albóndiga de cerdo -->
+                <div class="card" style="background: #FFF3E6;"><img class="card-img" src="images/albondigas-cerdo.png" alt="Albóndigas de cerdo"><h3>Albóndigas de cerdo</h3><div class="description">Ingredientes: cerdo, pan rallado, huevo, sal, pimienta, ajo, cebolla.</div><div class="precio">$360 / 8u</div><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div>
+                <!-- NUEVA: Hamburguesa de cerdo -->
+                <div class="card" style="background: #FFF7EC;"><img class="card-img" src="images/hamburguesas-cerdo.png" alt="Hamburguesa de cerdo"><h3>Hamburguesas de cerdo</h3><div class="description">Ingredientes: cerdo, huevo, sal, pimienta, ajo.</div><div class="precio">$430 / 8u</div><div class="badge-popular"><i class="fas fa-temperature-low"></i> 18 grados</div></div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; background: #FBEFE5; padding: 12px; border-radius: 60px; width: fit-content; margin-left: auto; margin-right: auto;">🚚 Sugerencia del chef: descongelar ante de freír en aceite  caliente</p>
+        </section>
+
+        <!-- ACCESO GRUPOS WHATSAPP / TELEGRAM para recepción del pedido -->
+        <section id="pedido" class="pedido-grupal">
+            <i class="fas fa-users" style="font-size: 3rem; color:#CB7B4A;"></i>
+            <h3 style="font-size: 1.9rem;">📢 ¡Súmate al grupo y coordina tu pedido!</h3>
+            <p style="max-width: 550px; margin: 10px auto;">En nuestro grupo de WhatsApp o canal de Telegram recibirás confirmación, seguimiento del pedido y promos exclusivas.</p>
+            <div class="botones-grupo">
+                <a href="https://chat.whatsapp.com/CaseraArgPedidos" class="grupo-card" target="_blank"><i class="fab fa-whatsapp fa-2x"></i><span>Grupo de WhatsApp (Clientes)</span></a>
+                <a href="https://t.me/casera_ofertas_arg" class="grupo-card" target="_blank"><i class="fab fa-telegram fa-2x"></i><span>Canal Telegram Ofertas</span></a>
+            </div>
+            <div class="texto-simple" style="margin-top: 16px; font-size: 0.95rem;">
+                <i class="fas fa-check-circle" style="color:#25D366;"></i> <strong>Al hacer clic serás redirigido al grupo. Allí coordinarás horario y forma de pago.</strong> 
+            </div>
+            <div style="margin-top: 32px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://wa.me/5491123456789?text=Hola%20Casera!%20Quiero%20chatear%20por%20un%20pedido%20de%20empanadas%20y%20croquetas" class="btn-whatsapp" style="padding: 10px 24px; font-size: 0.95rem;" target="_blank"><i class="fab fa-whatsapp"></i> Atención directa</a>
+                <a href="https://t.me/CaseraBotPedidos" class="btn-telegram" style="padding: 10px 24px;" target="_blank"><i class="fab fa-telegram"></i> Bot asistente Telegram</a>
+            </div>
+        </section>
+
+        <!-- MEJORAS: cada idea como un SERVICIO adicional para potenciar Casera -->
+        <section id="mejoras" class="mejoras-servicios">
+            <h3 style="font-size: 2rem; text-align: center; font-weight: 800;">🚀 Servicios & oportunidades</h3>
+            <div class="grid-ideas">
+                <div class="idea-item"><i class="fas fa-calendar-week"></i><h4>Menú semanal</h4><p>Suscríbete y recibe cada martes un combo con croquetas, bastones y empanadas a elección. 15% de descuento + envío sin cargo.</p></div>
+                <div class="idea-item"><i class="fas fa-gift"></i><h4>Combo regalo</h4><p>Recibe bastones, croquetas variadas + salsa casera. Ideal para regalar o picada.</p></div>
+                <div class="idea-item"><i class="fas fa-leaf"></i><h4>Línea Sin TACC + Veggie</h4><p>Croquetas de espinaca y quinoa, empanadas de lentejas. Próximamente más opciones veganas y sin glutten.</p></div>
+                <div class="idea-item"><i class="fas fa-truck-fast"></i><h4>Envíos rápidos</h4><p>En breve recibe los productos crudos pero listos para freír u hornear en 30 min.</p></div>
+                <div class="idea-item"><i class="fas fa-star-of-life"></i><h4>Club de beneficios</h4><p>Acumula puntos por cada pedido vía WhatsApp/Telegram, intercambia por productos gratis o envío exprés.</p></div>
+                <div class="idea-item"><i class="fas fa-chalkboard-user"></i><h4>Talleres online</h4><p>Aprende a darle tu toque a nuestros productos. Clase mensual gratis para miembros del club.</p></div>
+                <div class="idea-item"><i class="fas fa-hand-holding-usd"></i><h4>Plan Referidos</h4><p>Recomienda un amigo, ambos tienen 10% de descuento en su próximo pedido. Sin límite.</p></div>
+                <div class="idea-item"><i class="fas fa-users-viewfinder"></i><h4>Pedidos corporativos</h4><p>Empresas: encarga combos para after office o reuniones, factura y descuento por volumen.</p></div>
+                <div class="idea-item"><i class="fas fa-robot"></i><h4>Bot de WhatsApp + Telegram</h4><p>Automatizamos tu pedido y recordatorio de promos. Preguntale al bot por el "sorpresa de la semana".</p></div>
+            </div>
+        </section>
+
+        <!-- Sección simpática con data de contacto argenta -->
+        <div style="background: #FCF3EB; border-radius: 44px; padding: 28px; margin-bottom: 50px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            <div><i class="fas fa-store" style="font-size: 2rem;"></i><h3 style="margin-top: 4px;">📍 Hacemos envíos express</h3><p>Zona norte, Caballito, Belgrano, Palermo. <br> Retiro sin cargo por Villa Urquiza.</p></div>
+            <div><i class="fab fa-whatsapp" style="font-size: 2.2rem; color:#25D366;"></i><h3>Escribinos al WhatsApp</h3><p>+54 9 11 2345-6789 · Atención 10 a 20hs.</p></div>
+            <div><i class="fas fa-credit-card"></i><h3>Medios de pago</h3><p>Efectivo y transferencia por todas las plataformas.</p></div>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="container">
+        <p><i class="fas fa-heart" style="color:#CB7B4A;"></i> Casera — ¡ponle tu sazón! Seguinos en <i class="fab fa-instagram"></i> @casera.ok | <i class="fab fa-whatsapp"></i> +549 11 2345-6789</p>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e){
+            const hash = this.getAttribute('href');
+            if(hash === "#" || hash === "") return;
+            const target = document.querySelector(hash);
+            if(target){
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
